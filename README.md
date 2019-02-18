@@ -30,3 +30,10 @@ import pushcrew
 project = pushcrew.Api('5374d7dfeffa2eb49965624ba7596a09')
 project.add_suscriber_to_segment('254256', ["8fcd1d68c82dd39d65ef8ea9a7948bbe"])
 ```
+
+* Delete subscriber to segment.
+```
+import pushcrew
+project = pushcrew.Api('5374d7dfeffa2eb49965624ba7596a09')
+project.remove_subscriber_from_segment('254256', ["8fcd1d68c82dd39d65ef8ea9a7948bbe"])
+```

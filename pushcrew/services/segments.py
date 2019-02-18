@@ -1,3 +1,4 @@
+import json
 import urllib
 
 from ..schemas import create_object_from_json
@@ -40,9 +41,7 @@ class SegmentsMixin:
         segment_id -- ID of the segment.
         delete_list -- List of the subscriber.
         """
-        params = urllib.urlencode({
-            "delete_list": {"delete_list": delete_list}})
-        params_encoded = params.replace("%27", "%22").replace("+", "")
-        response = self.pushcrew.segments(segment_id).subscribers().POST(
-            data=params_encoded)
+        params = json.dumps({"delete_list": delete_list})
+        response = self.pushcrew.segments(segment_id).subscribers().PUT(
+            data=params)
         return create_object_from_json('StatusSegment', response)
