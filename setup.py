@@ -8,7 +8,8 @@ setup(
     author='Misa G.',
     author_email='hi@misalabs.com',
     install_requires=[
-        "hammock==0.2.4"
+        "hammock==0.2.4",
+        "marshmallow==2.18.1"
     ],
     packages=find_packages(),
     classifiers=[

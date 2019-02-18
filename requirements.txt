@@ -1,1 +1,2 @@
 hammock==0.2.4
+marshmallow-2.18.1
