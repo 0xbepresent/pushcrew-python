@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pushcrew',
-    version='0.0.1dev0',
+    version='0.0.2dev0',
     description='Python wrapper around the Pushcrew API',
     author='Misa G.',
     author_email='hi@misalabs.com',
