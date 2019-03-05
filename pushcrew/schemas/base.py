@@ -34,7 +34,6 @@ def create_object_from_json(object_name, res, many=False):
     schema = schema_class(object_name, many=many)
 
     user_data = res.json(parse_float=Decimal)
-    print user_data
     result = schema.load(user_data)
     return result
 
@@ -45,12 +44,15 @@ def _get_schema_class(object_name):
     based on the object_name.
     '''
     # Key is the name of the object, value is the schema class
-    from .segment import SegmentsSchema, AddSegmentSchema, StatusSchema
+    from .segment import (
+        SegmentsSchema, AddSegmentSchema, StatusSchema,
+        SegmentSubscribersSchema)
 
     schema_dict = {
         'Segments': SegmentsSchema,
         'AddSegment': AddSegmentSchema,
-        'StatusSegment': StatusSchema
+        'StatusSegment': StatusSchema,
+        'SegmentSubscribers': SegmentSubscribersSchema
     }
 
     schema_class = schema_dict.get(object_name)

@@ -1,6 +1,7 @@
 from marshmallow import fields, post_load, Schema
 
 from .base import BaseSchema
+from .subscriber import SubscriberSchema
 
 
 class SegmentSchema(Schema):
@@ -49,3 +50,15 @@ class StatusSchema(Schema):
     @post_load()
     def post_load(self, data):
         return BaseSchema.create_object('SatusSegment', data)
+
+
+class SegmentSubscribersSchema(Schema):
+    status = fields.String(data_key='status')
+    count_active = fields.Integer(data_key='count_active')
+    count_total = fields.Integer(data_key='count_total')
+    next_page = fields.String(data_key='next_page')
+    subscriber_list = fields.Nested(SubscriberSchema, many=True)
+
+    @post_load()
+    def post_load(self, data):
+        return BaseSchema.create_object('SegmentSubscribers', data)

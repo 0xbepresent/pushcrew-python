@@ -45,3 +45,22 @@ class SegmentsMixin:
         response = self.pushcrew.segments(segment_id).subscribers().PUT(
             data=params)
         return create_object_from_json('StatusSegment', response)
+
+    def get_subscribers_from_segment(self, segment_id):
+        """
+        This endpoint is used to get a list of subscribers present in a
+        segment.
+        The request method of this call needs to be "GET".
+        """
+        response = self.pushcrew.segments(segment_id).subscribers().GET(
+            params={'page': 1, 'per_page': 1024})
+        cf = create_object_from_json('SegmentSubscribers', response)
+        pages = int((cf.data.count_total / 1024) + 2)
+        subscribers_list = [] + cf.data.subscriber_list
+        for page in range(2, pages):
+            response = self.pushcrew.segments(
+                segment_id).subscribers().GET(
+                    params={'page': page, 'per_page': 1024})
+            cf = create_object_from_json('SegmentSubscribers', response)
+            subscribers_list = subscribers_list + cf.data.subscriber_list
+        return subscribers_list
