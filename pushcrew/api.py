@@ -1,5 +1,5 @@
 from hammock import Hammock
-from services.segments import SegmentsMixin
+from .services.segments import SegmentsMixin
 
 
 class Api(SegmentsMixin):
