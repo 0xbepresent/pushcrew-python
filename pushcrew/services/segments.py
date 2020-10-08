@@ -1,8 +1,12 @@
 import json
-import urllib
 
 from ..schemas import create_object_from_json
 
+import sys
+if sys.version_info[0] < 3:
+    from urllib import urlencode
+else:
+    from urllib.parse import urlencode
 
 class SegmentsMixin:
 
@@ -28,7 +32,7 @@ class SegmentsMixin:
         segment_id -- ID of the segment.
         subscriber_list -- List of the subscribers
         """
-        params = urllib.urlencode({
+        params = urlencode({
             "subscriber_list": {"subscriber_list": subscriber_list}})
         params_encoded = params.replace("%27", "%22").replace("+", "")
         response = self.pushcrew.segments(segment_id).subscribers().POST(
